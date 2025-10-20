@@ -16,7 +16,6 @@ add_executable(Figures
     src/Hexagon.cpp
     src/main.cpp
     src/Octagon.cpp
-    src/Array.cpp
 )
 
 add_executable(FiguresTest
@@ -26,7 +25,6 @@ add_executable(FiguresTest
     src/Triangle.cpp
     src/Hexagon.cpp
     src/Octagon.cpp
-    src/Array.cpp
     tests/test_figure.cpp
     tests/main_test.cpp
 )

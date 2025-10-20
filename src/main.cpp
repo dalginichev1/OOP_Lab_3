@@ -1,27 +1,27 @@
-#include "Array.hpp"
+#include <iostream>
+
+#include "FigureArray.hpp"
 #include "Hexagon.hpp"
 #include "Octagon.hpp"
 #include "Triangle.hpp"
 
-#include <iostream>
-
 int main() {
-    Array figures;
+    FigureArray figures;
 
     std::cout << "=== Создан треугольник ===" << std::endl;
     Figure* triangle = new Triangle();
     std::cin >> *triangle;
-    figures.add(triangle);
+    figures.push_back(triangle);
 
     std::cout << "\n=== Создан шестиугольник ===" << std::endl;
     Figure* hexagon = new Hexagon();
     std::cin >> *hexagon;
-    figures.add(hexagon);
+    figures.push_back(hexagon);
 
     std::cout << "\n=== Создан восьмиугольник ===" << std::endl;
     Figure* octagon = new Octagon();
     std::cin >> *octagon;
-    figures.add(octagon);
+    figures.push_back(octagon);
 
     std::cout << "\n=== Все фигуры ===" << std::endl;
     figures.printAll();

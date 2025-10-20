@@ -1,13 +1,12 @@
-#include <gtest/gtest.h>
-
 #include <sstream>
 
-#include "Array.hpp"
+#include <gtest/gtest.h>
+
+#include "FigureArray.hpp"
 #include "Hexagon.hpp"
 #include "Octagon.hpp"
 #include "Triangle.hpp"
 
-// Базовые тесты для Point
 TEST(PointTest, Basic) {
     Point p(1.5, 2.5);
     EXPECT_DOUBLE_EQ(p.x, 1.5);
@@ -24,7 +23,6 @@ TEST(PointTest, IO) {
     EXPECT_EQ(out.str(), "(3, 4)");
 }
 
-// Тесты для Triangle
 TEST(TriangleTest, Area) {
     Triangle t;
     std::stringstream ss("0 0 1 0 0 1");
@@ -41,7 +39,6 @@ TEST(TriangleTest, Center) {
     EXPECT_NEAR(center.y, 1.0, 0.001);
 }
 
-// Тесты для Hexagon
 TEST(HexagonTest, Area) {
     Hexagon h;
     std::stringstream ss("0 0 1 0 1.5 0.866 1 1.732 0 1.732 -0.5 0.866");
@@ -49,7 +46,6 @@ TEST(HexagonTest, Area) {
     EXPECT_GT(h.area(), 2.0);
 }
 
-// Тесты для Octagon
 TEST(OctagonTest, Area) {
     Octagon o;
     std::stringstream ss("1 0 0.707 0.707 0 1 -0.707 0.707 -1 0 -0.707 -0.707 0 -1 0.707 -0.707");
@@ -57,61 +53,59 @@ TEST(OctagonTest, Area) {
     EXPECT_GT(o.area(), 2.0);
 }
 
-// Тесты для Array
-TEST(ArrayTest, AddAndTotalArea) {
-    Array arr;
+TEST(FigureArrayTest, AddAndTotalArea) {
+    FigureArray arr;
 
     Triangle* t = new Triangle();
     std::stringstream ss1("0 0 1 0 0 1");
     t->read(ss1);
-    arr.add(t);
+    arr.push_back(t);
 
     EXPECT_NEAR(arr.totalArea(), 0.5, 0.001);
 }
 
-TEST(ArrayTest, Remove) {
-    Array arr;
+TEST(FigureArrayTest, Remove) {
+    FigureArray arr;
 
     Triangle* t = new Triangle();
     std::stringstream ss1("0 0 1 0 0 1");
     t->read(ss1);
-    arr.add(t);
+    arr.push_back(t);
 
     Hexagon* h = new Hexagon();
     std::stringstream ss2("0 0 1 0 1.5 0.866 1 1.732 0 1.732 -0.5 0.866");
     h->read(ss2);
-    arr.add(h);
+    arr.push_back(h);
 
     double totalWithTriangle = arr.totalArea();
-    arr.remove(0); // Удаляем треугольник
+    arr.erase(0);
     double totalWithoutTriangle = arr.totalArea();
 
     EXPECT_LT(totalWithoutTriangle, totalWithTriangle);
 }
 
-TEST(ArrayTest, EmptyArray) {
-    Array arr;
+TEST(FigureArrayTest, EmptyFigureArray) {
+    FigureArray arr;
     EXPECT_DOUBLE_EQ(arr.totalArea(), 0.0);
 }
 
-// Интеграционный тест
 TEST(IntegrationTest, AllFigures) {
-    Array arr;
+    FigureArray arr;
 
     Triangle* t = new Triangle();
     std::stringstream ss1("0 0 1 0 0 1");
     t->read(ss1);
-    arr.add(t);
+    arr.push_back(t);
 
     Hexagon* h = new Hexagon();
     std::stringstream ss2("0 0 1 0 1.5 0.866 1 1.732 0 1.732 -0.5 0.866");
     h->read(ss2);
-    arr.add(h);
+    arr.push_back(h);
 
     Octagon* o = new Octagon();
     std::stringstream ss3("1 0 0.707 0.707 0 1 -0.707 0.707 -1 0 -0.707 -0.707 0 -1 0.707 -0.707");
     o->read(ss3);
-    arr.add(o);
+    arr.push_back(o);
 
     double total = arr.totalArea();
     EXPECT_GT(total, 5.0);
