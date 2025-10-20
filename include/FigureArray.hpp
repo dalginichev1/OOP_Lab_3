@@ -1,15 +1,21 @@
 #pragma once
+
 #include "Figure.hpp"
 
 class FigureArray {
   public:
     FigureArray();
     ~FigureArray();
+
     void push_back(Figure* fig);
-    Figure*& operator[](int index);
-    Figure* operator[](int index) const;
-    void erase(int index);
     int size() const;
+    void erase(int index);
+
+    void printAll() const;
+    double totalArea() const;
+
+    Figure*& operator[](int index);
+    const Figure* const operator[](int index) const;
 
   private:
     Figure** data;

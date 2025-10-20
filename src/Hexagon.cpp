@@ -33,6 +33,14 @@ double Hexagon::area() const {
 bool Hexagon::operator==(const Figure& fig) const {
     const Hexagon* other = dynamic_cast<const Hexagon*>(&fig);
 
+    if (other == nullptr) {
+        return false;
+    }
+
+    if (points.size() != other->points.size()) {
+        return false;
+    }
+
     int i = 0;
     for (i = 0; i < points.size(); ++i) {
         if (!(points[i] == other->points[i])) {

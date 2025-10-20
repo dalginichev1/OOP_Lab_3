@@ -33,6 +33,14 @@ double Triangle::area() const {
 bool Triangle::operator==(const Figure& fig) const {
     const Triangle* other = dynamic_cast<const Triangle*>(&fig);
 
+    if (other == nullptr) {
+        return false;
+    }
+
+    if (points.size() != other->points.size()) {
+        return false;
+    }
+
     int i = 0;
     for (i = 0; i < points.size(); ++i) {
         if (!(points[i] == other->points[i])) {

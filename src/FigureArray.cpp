@@ -19,15 +19,27 @@ void FigureArray::push_back(Figure* fig) {
     data[size_++] = fig;
 }
 
-Figure*& FigureArray::operator[](int index) {
-    return data[index];
+void FigureArray::printAll() const {
+    int i = 0;
+    for (i = 0; i < size_; i++) {
+        std::cout << *data[i] << std::endl;
+    }
 }
 
-Figure* FigureArray::operator[](int index) const {
-    return data[index];
+double FigureArray::totalArea() const {
+    double total = 0.0;
+    int i = 0;
+    for (i = 0; i < size_; i++) {
+        total += data[i]->area();
+    }
+    return total;
 }
 
 void FigureArray::erase(int index) {
+    if (index >= size_ || index < 0) {
+        throw std::out_of_range("Index is out of range");
+    }
+
     for (int i = index; i < size_ - 1; i++) {
         data[i] = data[i + 1];
     }
@@ -36,4 +48,12 @@ void FigureArray::erase(int index) {
 
 int FigureArray::size() const {
     return size_;
+}
+
+Figure*& FigureArray::operator[](int index) {
+    return data[index];
+}
+
+const Figure* const FigureArray::operator[](int index) const {
+    return data[index];
 }
