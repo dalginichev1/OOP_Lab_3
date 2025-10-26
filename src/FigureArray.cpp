@@ -51,9 +51,15 @@ int FigureArray::size() const {
 }
 
 Figure*& FigureArray::operator[](int index) {
+    if (index < 0 || index >= size_) {
+        throw std::out_of_range("Index is out of range");
+    }
     return data[index];
 }
 
 const Figure* const FigureArray::operator[](int index) const {
+    if (index < 0 || index >= size_) {
+        throw std::out_of_range("Index is out of range ");
+    }
     return data[index];
 }
