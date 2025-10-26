@@ -33,7 +33,7 @@ double Octagon::area() const {
 bool Octagon::operator==(const Figure& fig) const {
     const Octagon* other = dynamic_cast<const Octagon*>(&fig);
 
-    if (other == nullptr) {
+    if (!other) {
         return false;
     }
 

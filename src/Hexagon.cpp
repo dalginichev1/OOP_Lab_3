@@ -33,7 +33,7 @@ double Hexagon::area() const {
 bool Hexagon::operator==(const Figure& fig) const {
     const Hexagon* other = dynamic_cast<const Hexagon*>(&fig);
 
-    if (other == nullptr) {
+    if (!other) {
         return false;
     }
 

@@ -33,7 +33,7 @@ double Triangle::area() const {
 bool Triangle::operator==(const Figure& fig) const {
     const Triangle* other = dynamic_cast<const Triangle*>(&fig);
 
-    if (other == nullptr) {
+    if (!other) {
         return false;
     }
 
